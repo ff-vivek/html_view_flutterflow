@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>American Express - Navigation Header</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'HelveticaNeue', 'Helvetica Neue', Arial, sans-serif;
+            background-color: #ffffff;
+            color: #333;
+        }
+
+        /* Main Navigation Header */
+        .bank-header {
+            background-color: #ffffff;
+            border-bottom: 1px solid #e5e5e5;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            height: 80px;
+        }
+
+        /* Logo Section */
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: #006fcf;
+            font-size: 18px;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+        }
+
+        .logo-icon {
+            margin-right: 12px;
+        }
+
+        /* Main Navigation */
+        .main-nav {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+        }
+
+        .main-nav li {
+            position: relative;
+        }
+
+        .main-nav a {
+            color: #333;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            padding: 8px 0;
+            transition: color 0.3s ease;
+            position: relative;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .main-nav a:hover {
+            color: #006fcf;
+        }
+
+        .main-nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #006fcf;
+            transition: width 0.3s ease;
+        }
+
+        .main-nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Dropdown Arrow */
+        .dropdown-arrow {
+            width: 0;
+            height: 0;
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent;
+            border-top: 4px solid #666;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-item.active .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .nav-item.active>a {
+            color: #006fcf;
+        }
+
+        /* Dropdown Menu */
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: white;
+            min-width: 280px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+            border: 1px solid #e5e5e5;
+            border-radius: 8px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            margin-top: 8px;
+        }
+
+        .nav-item.active .dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-section {
+            padding: 16px 0;
+        }
+
+        .dropdown-section:not(:last-child) {
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .dropdown-section h4 {
+            color: #006fcf;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            padding: 0 20px;
+        }
+
+        .dropdown a {
+            color: #333;
+            text-decoration: none;
+            padding: 8px 20px;
+            display: block;
+            font-size: 14px;
+            transition: background-color 0.2s ease;
+        }
+
+        .dropdown a:hover {
+            background-color: #f8f9fa;
+            color: #006fcf;
+        }
+
+        /* Right Section */
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        /* Search */
+        .search-container {
+            position: relative;
+        }
+
+        .search-input {
+            padding: 10px 40px 10px 16px;
+            border: 2px solid #e5e5e5;
+            border-radius: 24px;
+            font-size: 14px;
+            width: 240px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            border-color: #006fcf;
+            box-shadow: 0 0 0 3px rgba(0, 111, 207, 0.1);
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .search-btn:hover {
+            color: #006fcf;
+        }
+
+        /* Account Links */
+        .account-links {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .account-links a {
+            color: #333;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            padding: 8px 0;
+            transition: color 0.3s ease;
+        }
+
+        .account-links a:hover {
+            color: #006fcf;
+        }
+
+        .login-btn {
+            background-color: #006fcf;
+            color: white !important;
+            padding: 10px 20px;
+            border-radius: 24px;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+        .login-btn:hover {
+            background-color: #0056a3;
+            color: white !important;
+        }
+
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: #333;
+            font-size: 16px;
+            cursor: pointer;
+            padding: 8px;
+            font-weight: 500;
+        }
+
+        .mobile-menu-btn:hover {
+            color: #006fcf;
+        }
+
+        /* Overlay for closing dropdowns */
+        .dropdown-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            z-index: 999;
+            display: none;
+        }
+
+        .dropdown-overlay.active {
+            display: block;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 0 16px;
+                height: 70px;
+            }
+
+            .main-nav {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .search-input {
+                width: 200px;
+            }
+
+            .account-links {
+                gap: 12px;
+            }
+
+            .login-btn {
+                padding: 8px 16px;
+                font-size: 13px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 16px;
+            }
+
+            .search-input {
+                width: 160px;
+            }
+
+            .account-links a {
+                font-size: 13px;
+            }
+        }
+
+        /* Content Demo */
+        .content-demo {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .demo-section {
+            background: #f8f9fa;
+            padding: 40px;
+            border-radius: 12px;
+            border: 1px solid #e9ecef;
+        }
+
+        .demo-section h1 {
+            color: #006fcf;
+            margin-bottom: 24px;
+            font-size: 28px;
+            font-weight: 600;
+        }
+
+        .demo-section p {
+            margin-bottom: 20px;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .demo-section ul {
+            margin: 24px 0;
+            padding-left: 24px;
+        }
+
+        .demo-section li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+            color: #555;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-top: 32px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 24px;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+
+        .feature-card h3 {
+            color: #006fcf;
+            margin-bottom: 12px;
+            font-size: 18px;
+        }
+
+        .feature-card p {
+            color: #666;
+            font-size: 14px;
+            margin: 0;
+        }
+
+        /* Style the iframe to take all remaining area below navigation */
+        iframe {
+            width: 100%;
+            height: calc(100vh - 80px);
+            /* Full viewport height minus navigation height */
+            border: none;
+            /* Remove default border */
+            position: fixed;
+            /* Fix to viewport */
+            top: 80px;
+            /* Start below navigation (navigation height is 80px) */
+            left: 0;
+            z-index: 999;
+            /* Below navigation but above other content */
+        }
+
+        /* Responsive iframe adjustments */
+        @media (max-width: 768px) {
+            iframe {
+                height: calc(100vh - 70px);
+                /* Adjust for mobile navigation height */
+                top: 70px;
+                /* Mobile navigation height is 70px */
+            }
+        }
+
+        /* Hidden header styles */
+        .bank-header.hidden {
+            display: none;
+        }
+
+        /* Full screen iframe when header is hidden */
+        .bank-header.hidden~iframe,
+        iframe.fullscreen {
+            height: 100vh !important;
+            top: 0 !important;
+        }
+    </style>
+    </style>
+</head>
+<script src="functions.js"></script>
+
+<body>
+    <!-- Dropdown overlay -->
+    <div class="dropdown-overlay" id="dropdownOverlay"></div>
+
+    <!-- Main Navigation Header -->
+    <header class="bank-header">
+        <div class="header-container">
+            <!-- Logo -->
+            <a href="#" class="logo">
+                <svg class="logo-icon" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M2 6h20v2H2V6zm0 5h20v2H2v-2zm0 5h20v2H2v-2z" />
+                    <path d="M2 6v12h20V6H2zm2 2h16v8H4V8z" />
+                </svg>
+                Bank
+            </a>
+
+            <!-- Main Navigation -->
+            <nav>
+                <ul class="main-nav">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            My Account
+                            <span class="dropdown-arrow"></span>
+                        </a>
+                        <div class="dropdown">
+                            <div class="dropdown-section">
+                                <a href="#">Account Summary</a>
+                                <a href="#">Statements & Activity</a>
+                                <a href="#">Payment & Credits</a>
+                                <a href="#">Rewards & Benefits</a>
+                                <a href="#">Account Services</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            Cards
+                            <span class="dropdown-arrow"></span>
+                        </a>
+                        <div class="dropdown">
+                            <div class="dropdown-section">
+                                <h4>Personal Cards</h4>
+                                <a href="credit-cards.html">Credit Cards</a>
+                                <a href="#">Charge Cards</a>
+                                <a href="#">Prepaid Cards</a>
+                            </div>
+                            <div class="dropdown-section">
+                                <h4>Business Cards</h4>
+                                <a href="#">Business Credit Cards</a>
+                                <a href="#">Business Charge Cards</a>
+                                <a href="#">Corporate Cards</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            Banking
+                            <span class="dropdown-arrow"></span>
+                        </a>
+                        <div class="dropdown">
+                            <div class="dropdown-section">
+                                <h4>Personal Banking</h4>
+                                <a href="#">Personal Savings</a>
+                                <a href="#">Checking Accounts</a>
+                                <a href="#">Certificates of Deposit</a>
+                                <a href="#">Personal Loans</a>
+                            </div>
+                            <div class="dropdown-section">
+                                <h4>Business Banking</h4>
+                                <a href="#">Business Checking</a>
+                                <a href="#">Business Savings</a>
+                                <a href="#">Business Loans</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            Travel
+                            <span class="dropdown-arrow"></span>
+                        </a>
+                        <div class="dropdown">
+                            <div class="dropdown-section">
+                                <a href="#">Book Travel</a>
+                                <a href="#">Travel Deals & Destinations</a>
+                                <a href="#">Fine Hotels + Resorts</a>
+                                <a href="#">Travel Insurance</a>
+                                <a href="#">Airport Lounges</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            Rewards & Benefits
+                            <span class="dropdown-arrow"></span>
+                        </a>
+                        <div class="dropdown">
+                            <div class="dropdown-section">
+                                <a href="#">Membership Rewards</a>
+                                <a href="#">Bank Offers</a>
+                                <a href="#">Gift Cards</a>
+                                <a href="#">Experiences</a>
+                                <a href="#">Refer a Friend</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            Business
+                            <span class="dropdown-arrow"></span>
+                        </a>
+                        <div class="dropdown">
+                            <div class="dropdown-section">
+                                <h4>Small Business</h4>
+                                <a href="#">Business Cards</a>
+                                <a href="#">Business Banking</a>
+                                <a href="#">Business Travel</a>
+                                <a href="#">Business Loans</a>
+                            </div>
+                            <div class="dropdown-section">
+                                <h4>Corporate</h4>
+                                <a href="#">Corporate Cards</a>
+                                <a href="#">Global Commercial Services</a>
+                                <a href="#">Corporate Travel</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Right Section -->
+            <div class="nav-right">
+                <!-- Search -->
+                <div class="search-container">
+                    <input type="text" class="search-input" placeholder="Search...">
+                    <button class="search-btn">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <path
+                                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Account Links -->
+                <div class="account-links">
+                    <a href="#">Customer Service</a>
+                    <a href="#" class="login-btn">Log In</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button class="mobile-menu-btn">
+                    Menu
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Content Demo -->
+    <iframe src="index.html"></iframe>
+
+
+    <script>
+        // Check for showHeader condition and toggle header visibility
+        function checkShowHeader() {
+            const header = document.querySelector('.bank-header');
+            const iframe = document.querySelector('iframe');
+
+            // Check if window.showHeader exists and is true
+            const shouldShowHeader = window.showHeader === true || window['show header'] === true;
+
+            if (shouldShowHeader) {
+                // Show header
+                header.classList.remove('hidden');
+                iframe.classList.remove('fullscreen');
+                console.log('11Header visible - showHeader condition met');
+            } else {
+                // Hide header
+                header.classList.add('hidden');
+                iframe.classList.add('fullscreen');
+                console.log('11Header hidden - showHeader condition not met');
+            }
+        }
+
+        // Expose global functions to control header visibility
+        window.showBankHeader = function () {
+            window.showHeader = true;
+            checkShowHeader();
+        };
+
+        window.hideBankHeader = function () {
+            window.showHeader = false;
+            checkShowHeader();
+        };
+
+        window.toggleBankHeader = function () {
+            console.log("Toggling Bank Header!");
+
+            window.showHeader = !window.showHeader;
+            checkShowHeader();
+        };
+
+        // Expose checkShowHeader globally
+        window.checkShowHeader = checkShowHeader;
+
+        // Check on page load
+        document.addEventListener('DOMContentLoaded', function () {
+            // Initial check
+            checkShowHeader();
+
+            // Watch for changes to window.showHeader
+            let lastShowHeaderValue = window.showHeader || window['show header'];
+
+            setInterval(function () {
+                const currentShowHeaderValue = window.showHeader || window['show header'];
+                if (currentShowHeaderValue !== lastShowHeaderValue) {
+                    lastShowHeaderValue = currentShowHeaderValue;
+                    checkShowHeader();
+                }
+            }, 100); // Check every 100ms for changes
+
+            // Dropdown functionality
+            const navItems = document.querySelectorAll('.nav-item');
+            const dropdownOverlay = document.getElementById('dropdownOverlay');
+            let activeDropdown = null;
+
+            // Handle navigation item clicks
+            navItems.forEach(item => {
+                const link = item.querySelector('.nav-link');
+
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    // Close any open dropdown
+                    if (activeDropdown && activeDropdown !== item) {
+                        activeDropdown.classList.remove('active');
+                    }
+
+                    // Toggle current dropdown
+                    if (item.classList.contains('active')) {
+                        item.classList.remove('active');
+                        dropdownOverlay.classList.remove('active');
+                        activeDropdown = null;
+                    } else {
+                        item.classList.add('active');
+                        dropdownOverlay.classList.add('active');
+                        activeDropdown = item;
+                    }
+                });
+            });
+
+            // Close dropdown when clicking overlay
+            dropdownOverlay.addEventListener('click', function () {
+                if (activeDropdown) {
+                    activeDropdown.classList.remove('active');
+                    dropdownOverlay.classList.remove('active');
+                    activeDropdown = null;
+                }
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function (e) {
+                if (!e.target.closest('.nav-item') && !e.target.closest('.dropdown')) {
+                    if (activeDropdown) {
+                        activeDropdown.classList.remove('active');
+                        dropdownOverlay.classList.remove('active');
+                        activeDropdown = null;
+                    }
+                }
+            });
+
+            // Handle dropdown links
+            document.querySelectorAll('.dropdown a').forEach(link => {
+                link.addEventListener('click', function (e) {
+                    // Don't prevent default if it's a real link
+                    if (this.getAttribute('href') !== '#') {
+                        // Close dropdown and allow navigation
+                        if (activeDropdown) {
+                            activeDropdown.classList.remove('active');
+                            dropdownOverlay.classList.remove('active');
+                            activeDropdown = null;
+                        }
+                        console.log('Navigating to:', this.getAttribute('href'));
+                        return; // Allow the link to navigate
+                    }
+
+                    e.preventDefault();
+
+                    // Close dropdown for placeholder links
+                    if (activeDropdown) {
+                        activeDropdown.classList.remove('active');
+                        dropdownOverlay.classList.remove('active');
+                        activeDropdown = null;
+                    }
+
+                    console.log('Placeholder link clicked:', this.textContent);
+                });
+            });
+        });
+    </script>
+
+</body>
+
+</html>
