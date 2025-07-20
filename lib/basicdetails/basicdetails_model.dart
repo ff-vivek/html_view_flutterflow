@@ -8,6 +8,7 @@ import '/flutter_flow/form_field_controller.dart';
 import 'dart:ui';
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import 'basicdetails_widget.dart' show BasicdetailsWidget;
+import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -50,12 +51,17 @@ class BasicdetailsModel extends FlutterFlowModel<BasicdetailsWidget> {
   FocusNode? textFieldFocusNode6;
   TextEditingController? textController6;
   String? Function(BuildContext, String?)? textController6Validator;
+  // State field(s) for PinCode widget.
+  TextEditingController? pinCodeController;
+  FocusNode? pinCodeFocusNode;
+  String? Function(BuildContext, String?)? pinCodeControllerValidator;
   // State field(s) for Checkbox widget.
   bool? checkboxValue;
 
   @override
   void initState(BuildContext context) {
     customDropDownModel = createModel(context, () => DropDownModel());
+    pinCodeController = TextEditingController();
   }
 
   @override
@@ -78,5 +84,8 @@ class BasicdetailsModel extends FlutterFlowModel<BasicdetailsWidget> {
 
     textFieldFocusNode6?.dispose();
     textController6?.dispose();
+
+    pinCodeFocusNode?.dispose();
+    pinCodeController?.dispose();
   }
 }

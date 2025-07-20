@@ -5,10 +5,10 @@ packages:
     dependency: "direct main"
     description:
       name: aligned_dialog
-      sha256: "5d227d0e9d96bfa06699656b05f2cfba2f45645ccc52c43272e33ae307b26be8"
+      sha256: c6ce4f82a5ab35dde2c48caa436eab4da9d6a4238802f67312c878394caf055d
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.7"
+    version: "0.0.6"
   args:
     dependency: transitive
     description:

@@ -7,6 +7,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import 'dart:ui';
 import '/custom_code/widgets/index.dart' as custom_widgets;
+import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -52,6 +53,8 @@ class _BasicdetailsWidgetState extends State<BasicdetailsWidget> {
 
     _model.textController6 ??= TextEditingController();
     _model.textFieldFocusNode6 ??= FocusNode();
+
+    _model.pinCodeFocusNode ??= FocusNode();
   }
 
   @override
@@ -83,8 +86,8 @@ class _BasicdetailsWidgetState extends State<BasicdetailsWidget> {
               color: FlutterFlowTheme.of(context).primaryText,
               size: 24.0,
             ),
-            onPressed: () {
-              print('IconButton pressed ...');
+            onPressed: () async {
+              context.safePop();
             },
           ),
           title: Text(
@@ -1143,6 +1146,67 @@ class _BasicdetailsWidgetState extends State<BasicdetailsWidget> {
                                       );
                                     }),
                                 ],
+                              ),
+                              PinCodeTextField(
+                                autoDisposeControllers: false,
+                                appContext: context,
+                                length: 6,
+                                textStyle: FlutterFlowTheme.of(context)
+                                    .bodyLarge
+                                    .override(
+                                      font: GoogleFonts.inter(
+                                        fontWeight: FlutterFlowTheme.of(context)
+                                            .bodyLarge
+                                            .fontWeight,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .bodyLarge
+                                            .fontStyle,
+                                      ),
+                                      letterSpacing: 0.0,
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .bodyLarge
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyLarge
+                                          .fontStyle,
+                                    ),
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                enableActiveFill: false,
+                                autoFocus: true,
+                                focusNode: _model.pinCodeFocusNode,
+                                enablePinAutofill: false,
+                                errorTextSpace: 16.0,
+                                showCursor: true,
+                                cursorColor:
+                                    FlutterFlowTheme.of(context).primary,
+                                obscureText: false,
+                                blinkWhenObscuring: true,
+                                hintCharacter: '●',
+                                keyboardType: TextInputType.number,
+                                pinTheme: PinTheme(
+                                  fieldHeight: 44.0,
+                                  fieldWidth: 44.0,
+                                  borderWidth: 2.0,
+                                  borderRadius: BorderRadius.only(
+                                    bottomLeft: Radius.circular(12.0),
+                                    bottomRight: Radius.circular(12.0),
+                                    topLeft: Radius.circular(12.0),
+                                    topRight: Radius.circular(12.0),
+                                  ),
+                                  shape: PinCodeFieldShape.box,
+                                  activeColor:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                  inactiveColor:
+                                      FlutterFlowTheme.of(context).alternate,
+                                  selectedColor:
+                                      FlutterFlowTheme.of(context).primary,
+                                ),
+                                controller: _model.pinCodeController,
+                                onChanged: (_) {},
+                                autovalidateMode: AutovalidateMode.disabled,
+                                validator: _model.pinCodeControllerValidator
+                                    .asValidator(context),
                               ),
                             ].divide(SizedBox(height: 16.0)),
                           ),
