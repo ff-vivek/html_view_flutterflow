@@ -8,10 +8,15 @@ import 'package:flutter/material.dart';
 // Begin custom action code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
-import 'package:html_view/custom_code/js_external_functions.dart' as js;
+import 'package:flutter_web_plugins/url_strategy.dart';
 
-Future toggleHeader() async {
+Future disableBrowserBackButton() async {
   // Add your function code here!
+  setUrlStrategy(NoHistoryUrlStrategy());
+}
 
-  js.toggleBankHeader();
+class NoHistoryUrlStrategy extends PathUrlStrategy {
+  @override
+  void pushState(Object? state, String title, String url) =>
+      replaceState(state, title, url);
 }

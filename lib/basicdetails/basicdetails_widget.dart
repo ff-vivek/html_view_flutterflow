@@ -1,7 +1,10 @@
+import '/dropdown/drop_down/drop_down_widget.dart';
+import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/form_field_controller.dart';
 import 'dart:ui';
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import 'package:flutter/material.dart';
@@ -16,7 +19,7 @@ class BasicdetailsWidget extends StatefulWidget {
   const BasicdetailsWidget({super.key});
 
   static String routeName = 'Basicdetails';
-  static String routePath = '/basicdetails';
+  static String routePath = 'basicdetails';
 
   @override
   State<BasicdetailsWidget> createState() => _BasicdetailsWidgetState();
@@ -85,7 +88,7 @@ class _BasicdetailsWidgetState extends State<BasicdetailsWidget> {
             },
           ),
           title: Text(
-            'Basic Details',
+            'Form Details',
             style: FlutterFlowTheme.of(context).titleLarge.override(
                   font: GoogleFonts.interTight(
                     fontWeight: FontWeight.w600,
@@ -466,6 +469,159 @@ class _BasicdetailsWidgetState extends State<BasicdetailsWidget> {
                                     ),
                                   ),
                                 ].divide(SizedBox(width: 12.0)),
+                              ),
+                              Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  custom_widgets.FocusedDropDownButton(
+                                    width: 200.0,
+                                    height: 72.0,
+                                    hintText: 'Select Gender',
+                                    initialOption: 'Male',
+                                    errorMessage: 'Please select one option',
+                                    labelText: 'Gender',
+                                    dropdownList: ["Male", "Female", "Other"],
+                                    bgColor: Colors.white,
+                                    onSelection: (selectedValue) async {
+                                      _model.selectedGender = selectedValue;
+                                      safeSetState(() {});
+                                    },
+                                  ),
+                                  Align(
+                                    alignment: AlignmentDirectional(-1.0, 0.0),
+                                    child: FlutterFlowDropDown<String>(
+                                      controller: _model
+                                              .nativeDropDownValueController ??=
+                                          FormFieldController<String>(
+                                        _model.nativeDropDownValue ??=
+                                            'Option 3',
+                                      ),
+                                      options: [
+                                        'Option 1',
+                                        'Option 2',
+                                        'Option 3'
+                                      ],
+                                      onChanged: (val) => safeSetState(() =>
+                                          _model.nativeDropDownValue = val),
+                                      width: 200.0,
+                                      height: 48.0,
+                                      textStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            font: GoogleFonts.inter(
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontStyle,
+                                            ),
+                                            letterSpacing: 0.0,
+                                            fontWeight:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontWeight,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontStyle,
+                                          ),
+                                      hintText: 'Select Option',
+                                      icon: Icon(
+                                        Icons.keyboard_arrow_down_rounded,
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryText,
+                                        size: 24.0,
+                                      ),
+                                      fillColor: FlutterFlowTheme.of(context)
+                                          .secondaryBackground,
+                                      elevation: 2.0,
+                                      borderColor: Colors.transparent,
+                                      borderWidth: 0.0,
+                                      borderRadius: 8.0,
+                                      margin: EdgeInsetsDirectional.fromSTEB(
+                                          12.0, 0.0, 12.0, 0.0),
+                                      hidesUnderline: true,
+                                      isOverButton: false,
+                                      isSearchable: false,
+                                      isMultiSelect: false,
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 300.0,
+                                    decoration: BoxDecoration(
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryBackground,
+                                    ),
+                                    child: wrapWithModel(
+                                      model: _model.customDropDownModel,
+                                      updateCallback: () => safeSetState(() {}),
+                                      child: DropDownWidget(
+                                        hintText: 'Select Age group',
+                                        initialOption: '',
+                                        maxWidth: 300.0,
+                                        isDisabled: false,
+                                        dropdownMaxHeight: 50.0,
+                                        menuMaxHeight: 250.0,
+                                        showError: true,
+                                        dropdownLabels: [
+                                          '18-24',
+                                          '25-35',
+                                          '35-55'
+                                        ],
+                                        dropdownValues: [
+                                          '18-24',
+                                          '25-35',
+                                          '35-55'
+                                        ],
+                                        onSelect: (onSelect) async {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            SnackBar(
+                                              content: Text(
+                                                'Selected value ${onSelect.label}',
+                                                style: TextStyle(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryText,
+                                                ),
+                                              ),
+                                              duration:
+                                                  Duration(milliseconds: 4000),
+                                              backgroundColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .accent3,
+                                            ),
+                                          );
+                                        },
+                                        onClickDropdown: (onMenuOpened) async {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            SnackBar(
+                                              content: Text(
+                                                'Dropdown clicked',
+                                                style: TextStyle(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryText,
+                                                ),
+                                              ),
+                                              duration:
+                                                  Duration(milliseconds: 4000),
+                                              backgroundColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .accent4,
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                ]
+                                    .divide(SizedBox(width: 32.0))
+                                    .around(SizedBox(width: 32.0)),
                               ),
                               TextFormField(
                                 controller: _model.textController3,
@@ -987,20 +1143,6 @@ class _BasicdetailsWidgetState extends State<BasicdetailsWidget> {
                                       );
                                     }),
                                 ],
-                              ),
-                              custom_widgets.FocusedDropDownButton(
-                                width: double.infinity,
-                                height: 72.0,
-                                hintText: 'Select Gender',
-                                initialOption: 'Male',
-                                errorMessage: 'Please select one option',
-                                labelText: 'Gender',
-                                dropdownList: ["Male", "Female", "Other"],
-                                bgColor: Colors.white,
-                                onSelection: (selectedValue) async {
-                                  _model.selectedGender = selectedValue;
-                                  safeSetState(() {});
-                                },
                               ),
                             ].divide(SizedBox(height: 16.0)),
                           ),

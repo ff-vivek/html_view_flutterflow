@@ -15,7 +15,7 @@ class HomePageWidget extends StatefulWidget {
   const HomePageWidget({super.key});
 
   static String routeName = 'HomePage';
-  static String routePath = '/homePage';
+  static String routePath = 'homePage';
 
   @override
   State<HomePageWidget> createState() => _HomePageWidgetState();
@@ -51,21 +51,16 @@ class _HomePageWidgetState extends State<HomePageWidget> {
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         body: SafeArea(
           top: true,
-          child: Container(
+          child: custom_widgets.HomepageBody(
             width: double.infinity,
             height: double.infinity,
-            child: custom_widgets.ScrollNotification(
-              width: double.infinity,
-              height: double.infinity,
-              onPageStart: () async {
-                await actions.showHeader();
-              },
-              onPageEnd: () async {},
-              onScrollStart: () async {
-                await actions.hideHeader();
-              },
-              widgetBuilder: () => HomepageComponentWidget(),
-            ),
+            onPageStart: () async {
+              await actions.showHeader();
+            },
+            onPageScrolled: () async {
+              await actions.hideHeader();
+            },
+            bodyWidget: () => HomepageComponentWidget(),
           ),
         ),
       ),
