@@ -1180,7 +1180,7 @@ class _BasicdetailsWidgetState extends State<BasicdetailsWidget> {
                                 showCursor: true,
                                 cursorColor:
                                     FlutterFlowTheme.of(context).primary,
-                                obscureText: false,
+                                obscureText: true,
                                 blinkWhenObscuring: true,
                                 hintCharacter: '●',
                                 keyboardType: TextInputType.number,
