@@ -69,15 +69,16 @@ class _DropdownMenuWidgetState extends State<DropdownMenuWidget> {
             itemCount: options.length,
             itemBuilder: (context, optionsIndex) {
               final optionsItem = options[optionsIndex];
-              return InkWell(
-                splashColor: Colors.transparent,
-                focusColor: Colors.transparent,
-                hoverColor: Colors.transparent,
-                highlightColor: Colors.transparent,
+              return FFFocusIndicator(
                 onTap: () async {
                   // close and return value
                   Navigator.pop(context, optionsItem);
                 },
+                border: Border.all(
+                  color: FlutterFlowTheme.of(context).primary,
+                  width: 1.0,
+                ),
+                borderRadius: BorderRadius.circular(2.0),
                 child: DropdownMenuItemWidget(
                   key: Key('Key01w_${optionsIndex}_of_${options.length}'),
                   itemLabel: optionsItem.label,

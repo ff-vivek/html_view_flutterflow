@@ -45,60 +45,73 @@ class _DropdownMenuItemWidgetState extends State<DropdownMenuItemWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Visibility(
-      visible: widget!.itemLabel != null && widget!.itemLabel != '',
-      child: MouseRegion(
-        opaque: false,
-        cursor: MouseCursor.defer ?? MouseCursor.defer,
-        child: Container(
-          width: double.infinity,
-          constraints: BoxConstraints(
-            minHeight: 45.0,
-          ),
-          decoration: BoxDecoration(
-            color: () {
-              if (widget!.isSelected) {
-                return FlutterFlowTheme.of(context).primary;
-              } else if (_model.mouseRegionHovered!) {
-                return FlutterFlowTheme.of(context).secondary;
-              } else {
-                return Color(0x00000000);
-              }
-            }(),
-            border: Border.all(
-              color: Colors.black,
+    return Container(
+      decoration: BoxDecoration(),
+      child: Visibility(
+        visible: widget!.itemLabel != null && widget!.itemLabel != '',
+        child: MouseRegion(
+          opaque: false,
+          cursor: MouseCursor.defer ?? MouseCursor.defer,
+          child: Semantics(
+            button: false,
+            container: false,
+            image: false,
+            header: false,
+            explicitChildNodes: false,
+            excludeSemantics: false,
+            liveRegion: false,
+            child: Container(
+              width: double.infinity,
+              constraints: BoxConstraints(
+                minHeight: 45.0,
+              ),
+              decoration: BoxDecoration(
+                color: () {
+                  if (widget!.isSelected) {
+                    return FlutterFlowTheme.of(context).primary;
+                  } else if (_model.mouseRegionHovered!) {
+                    return FlutterFlowTheme.of(context).secondary;
+                  } else {
+                    return Color(0x00000000);
+                  }
+                }(),
+                border: Border.all(
+                  color: Colors.black,
+                ),
+              ),
+              child: Padding(
+                padding: EdgeInsets.all(12.0),
+                child: Text(
+                  widget!.itemLabel!,
+                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                        font: GoogleFonts.inter(
+                          fontWeight: FlutterFlowTheme.of(context)
+                              .bodyMedium
+                              .fontWeight,
+                          fontStyle:
+                              FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                        ),
+                        color: widget!.isSelected
+                            ? FlutterFlowTheme.of(context).primary
+                            : FlutterFlowTheme.of(context).primaryText,
+                        fontSize: 16.0,
+                        letterSpacing: 0.0,
+                        fontWeight:
+                            FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                        fontStyle:
+                            FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                      ),
+                ),
+              ),
             ),
           ),
-          child: Padding(
-            padding: EdgeInsets.all(12.0),
-            child: Text(
-              widget!.itemLabel!,
-              style: FlutterFlowTheme.of(context).bodyMedium.override(
-                    font: GoogleFonts.inter(
-                      fontWeight:
-                          FlutterFlowTheme.of(context).bodyMedium.fontWeight,
-                      fontStyle:
-                          FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                    ),
-                    color: widget!.isSelected
-                        ? FlutterFlowTheme.of(context).primary
-                        : FlutterFlowTheme.of(context).primaryText,
-                    fontSize: 16.0,
-                    letterSpacing: 0.0,
-                    fontWeight:
-                        FlutterFlowTheme.of(context).bodyMedium.fontWeight,
-                    fontStyle:
-                        FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                  ),
-            ),
-          ),
+          onEnter: ((event) async {
+            safeSetState(() => _model.mouseRegionHovered = true);
+          }),
+          onExit: ((event) async {
+            safeSetState(() => _model.mouseRegionHovered = false);
+          }),
         ),
-        onEnter: ((event) async {
-          safeSetState(() => _model.mouseRegionHovered = true);
-        }),
-        onExit: ((event) async {
-          safeSetState(() => _model.mouseRegionHovered = false);
-        }),
       ),
     );
   }

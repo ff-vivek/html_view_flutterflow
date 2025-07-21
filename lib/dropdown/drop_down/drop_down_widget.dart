@@ -119,11 +119,7 @@ class _DropDownWidgetState extends State<DropDownWidget>
   @override
   Widget build(BuildContext context) {
     return Builder(
-      builder: (context) => InkWell(
-        splashColor: Colors.transparent,
-        focusColor: Colors.transparent,
-        hoverColor: Colors.transparent,
-        highlightColor: Colors.transparent,
+      builder: (context) => FFFocusIndicator(
         onTap: () async {
           var _shouldSetState = false;
           if (widget!.isDisabled!) {
@@ -188,6 +184,11 @@ class _DropDownWidgetState extends State<DropDownWidget>
           return;
           if (_shouldSetState) safeSetState(() {});
         },
+        border: Border.all(
+          color: FlutterFlowTheme.of(context).primary,
+          width: 2.0,
+        ),
+        borderRadius: BorderRadius.circular(4.0),
         child: Container(
           constraints: BoxConstraints(
             maxWidth: widget!.maxWidth!,

@@ -1,3 +1,5 @@
+import '/custom_code/actions/index.dart' as actions;
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -7,13 +9,15 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import 'flutter_flow/flutter_flow_util.dart';
 import 'flutter_flow/nav/nav.dart';
 import 'index.dart';
-import 'custom_code/disable_back_button_strategy.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   GoRouter.optionURLReflectsImperativeAPIs = true;
   // usePathUrlStrategy();
-  disableBrowserBackButton();
+
+  // Start initial custom actions code
+  actions.disableBrowserBackButton();
+  // End initial custom actions code
 
   runApp(MyApp());
 }

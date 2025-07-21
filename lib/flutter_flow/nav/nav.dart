@@ -58,6 +58,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: HomePageWidget.routeName,
               path: HomePageWidget.routePath,
               builder: (context, params) => HomePageWidget(),
+            ),
+            FFRoute(
+              name: PinCodePageWidget.routeName,
+              path: PinCodePageWidget.routePath,
+              builder: (context, params) => PinCodePageWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),
