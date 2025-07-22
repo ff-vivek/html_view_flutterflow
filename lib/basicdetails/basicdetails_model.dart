@@ -32,8 +32,8 @@ class BasicdetailsModel extends FlutterFlowModel<BasicdetailsWidget> {
   // State field(s) for NativeDropDown widget.
   String? nativeDropDownValue;
   FormFieldController<String>? nativeDropDownValueController;
-  // Model for CustomDropDown.
-  late DropDownModel customDropDownModel;
+  // Model for AgeDropDown.
+  late DropDownModel ageDropDownModel;
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode3;
   TextEditingController? textController3;
@@ -55,7 +55,7 @@ class BasicdetailsModel extends FlutterFlowModel<BasicdetailsWidget> {
 
   @override
   void initState(BuildContext context) {
-    customDropDownModel = createModel(context, () => DropDownModel());
+    ageDropDownModel = createModel(context, () => DropDownModel());
   }
 
   @override
@@ -66,7 +66,7 @@ class BasicdetailsModel extends FlutterFlowModel<BasicdetailsWidget> {
     textFieldFocusNode2?.dispose();
     textController2?.dispose();
 
-    customDropDownModel.dispose();
+    ageDropDownModel.dispose();
     textFieldFocusNode3?.dispose();
     textController3?.dispose();
 

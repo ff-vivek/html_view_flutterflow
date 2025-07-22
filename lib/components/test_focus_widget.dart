@@ -27,6 +27,8 @@ class _TestFocusWidgetState extends State<TestFocusWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => TestFocusModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

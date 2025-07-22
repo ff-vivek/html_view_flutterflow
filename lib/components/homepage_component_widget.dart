@@ -31,6 +31,8 @@ class _HomepageComponentWidgetState extends State<HomepageComponentWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => HomepageComponentModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

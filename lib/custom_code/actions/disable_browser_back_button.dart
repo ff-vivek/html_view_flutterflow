@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_web_plugins/url_strategy.dart';
 
-Future disableBrowserBackButton() async {
+void disableBrowserBackButton() {
   // Add your function code here!
   setUrlStrategy(NoHistoryUrlStrategy());
 }

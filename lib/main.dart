@@ -1,5 +1,3 @@
-import '/custom_code/actions/index.dart' as actions;
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -9,15 +7,12 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import 'flutter_flow/flutter_flow_util.dart';
 import 'flutter_flow/nav/nav.dart';
 import 'index.dart';
+import '/custom_code/actions/index.dart' as actions;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   GoRouter.optionURLReflectsImperativeAPIs = true;
-  // usePathUrlStrategy();
-
-  // Start initial custom actions code
   actions.disableBrowserBackButton();
-  // End initial custom actions code
 
   runApp(MyApp());
 }
@@ -29,6 +24,14 @@ class MyApp extends StatefulWidget {
 
   static _MyAppState of(BuildContext context) =>
       context.findAncestorStateOfType<_MyAppState>()!;
+}
+
+class MyAppScrollBehavior extends MaterialScrollBehavior {
+  @override
+  Set<PointerDeviceKind> get dragDevices => {
+        PointerDeviceKind.touch,
+        PointerDeviceKind.mouse,
+      };
 }
 
 class _MyAppState extends State<MyApp> {
@@ -66,6 +69,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       title: 'HtmlView',
+      scrollBehavior: MyAppScrollBehavior(),
       localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
@@ -74,6 +78,9 @@ class _MyAppState extends State<MyApp> {
       supportedLocales: const [Locale('en', '')],
       theme: ThemeData(
         brightness: Brightness.light,
+        scrollbarTheme: ScrollbarThemeData(
+          interactive: true,
+        ),
         useMaterial3: false,
       ),
       themeMode: _themeMode,

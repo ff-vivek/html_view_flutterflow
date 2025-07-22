@@ -107,6 +107,8 @@ class _DropDownWidgetState extends State<DropDownWidget>
           !anim.applyInitialState),
       this,
     );
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

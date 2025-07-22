@@ -52,6 +52,8 @@ class _BasicdetailsWidgetState extends State<BasicdetailsWidget> {
 
     _model.textController6 ??= TextEditingController();
     _model.textFieldFocusNode6 ??= FocusNode();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -556,7 +558,7 @@ class _BasicdetailsWidgetState extends State<BasicdetailsWidget> {
                                           .secondaryBackground,
                                     ),
                                     child: wrapWithModel(
-                                      model: _model.customDropDownModel,
+                                      model: _model.ageDropDownModel,
                                       updateCallback: () => safeSetState(() {}),
                                       child: DropDownWidget(
                                         hintText: 'Select Age group',

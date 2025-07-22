@@ -40,6 +40,8 @@ class _DropdownMenuWidgetState extends State<DropdownMenuWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => DropdownMenuModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
